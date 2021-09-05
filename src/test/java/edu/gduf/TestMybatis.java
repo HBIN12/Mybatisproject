@@ -7,9 +7,12 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
+import edu.gduf.bean.User;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
+import java.util.Set;
 
 
 public class TestMybatis {
@@ -17,7 +20,7 @@ public class TestMybatis {
     private SqlSessionFactory sessionFactory;
     @Before
     public void init() {
-        InputStream is = null;
+        InputStream is;
         /*读取文件抛出异常*/
         try {
             is = Resources.getResourceAsStream("mybatis-config.xml");
@@ -72,7 +75,7 @@ public class TestMybatis {
         session.close();
     }*/
 
-/*    @Test
+    @Test
     public void SelectAllUser() {
         SqlSession session=sessionFactory.openSession();
         Map<Integer, User> UserMap = session.selectMap("edu.gduf.mapper.UserMapper.SelectAllUser", "id");
@@ -81,5 +84,5 @@ public class TestMybatis {
             System.out.println("ID:"+UserMap.get(id).getId()+",Name:"+UserMap.get(id).getName()+",role:"+UserMap.get(id).getRole());
         }
         session.close();
-    }*/
+    }
 }
