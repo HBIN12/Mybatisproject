@@ -18,6 +18,7 @@ public class TestMybatis {
     @Before
     public void init() {
         InputStream is = null;
+        /*读取文件抛出异常*/
         try {
             is = Resources.getResourceAsStream("mybatis-config.xml");
             sessionFactory = new SqlSessionFactoryBuilder().build(is);
