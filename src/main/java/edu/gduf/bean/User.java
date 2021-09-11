@@ -1,5 +1,7 @@
 package edu.gduf.bean;
 
+import org.apache.ibatis.type.Alias;
+
 public class User {
     private Integer id;
     private String name;

@@ -3,18 +3,32 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <properties resource="JDBC.properties"></properties>
+<!--    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>-->
+    <!--加别名三种方式-->
+   <!-- <typeAliases><typeAlias type="edu.gduf.bean.User" alias="user"></typeAlias>
+    </typeAliases>-->
+    <typeAliases><package name="edu.gduf.bean"></package></typeAliases>
+    <!--直接在bean类中加@Alias-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+        </plugin>
+    </plugins>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"></property>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?serverTimezone=UTC"></property>
-                <property name="username" value="root"></property>
-                <property name="password" value="1135911642"></property>
+                <property name="driver" value="${driver}"></property>
+                <property name="url" value="${url}"></property>
+                <property name="username" value="${username}"></property>
+                <property name="password" value="${password}"></property>
             </dataSource>
         </environment>
     </environments>
     <mappers>
         <mapper resource="mappers/UserMapper.xml"></mapper>
+        <mapper resource="MBGmappers/TUserMapper.xml"></mapper>
     </mappers>
 </configuration>

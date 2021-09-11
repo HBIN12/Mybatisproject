@@ -1,6 +1,7 @@
 package edu.gduf;
 
 
+import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -34,16 +35,16 @@ public class TestMybatis {
         SqlSession session=sessionFactory.openSession();
         System.out.println("session:"+session);
     }
-/*
     @Test
     public void insertTest() {
         SqlSession session=sessionFactory.openSession();
-        User user=new User("CB","123123","user");
+        User user=new User("CYB","123123","user");
         int result = session.insert("edu.gduf.mapper.UserMapper.insert", user);
         System.out.println("成功插入"+result+"条数据");
+        System.out.println("最后插入的id："+user.getId());
         session.commit();
         session.close();
-    }*/
+    }
 
 /*    @Test
     public void DeleteByNameTest() {
@@ -78,6 +79,7 @@ public class TestMybatis {
     @Test
     public void SelectAllUser() {
         SqlSession session=sessionFactory.openSession();
+        PageHelper.startPage(1,2);
         Map<Integer, User> UserMap = session.selectMap("edu.gduf.mapper.UserMapper.SelectAllUser", "id");
         Set<Integer> ids=UserMap.keySet();
         for(Integer id:ids){
