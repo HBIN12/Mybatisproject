@@ -1,4 +1,4 @@
-package edu.gduf;
+package com.mbg;
 
 import com.mbg.bean.TUser;
 import com.mbg.bean.TUserExample;
