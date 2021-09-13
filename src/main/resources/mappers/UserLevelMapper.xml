@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.gduf.mapper.UserLevelMapper">
+<resultMap id="userlevel" type="edu.gduf.bean.UserLevel">
+    <id property="id" column="id"></id>
+    <result property="level" column="level"></result>
+    <association property="user" javaType="edu.gduf.bean.User">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+    </association>
+</resultMap>
+    <select id="getUserById" parameterType="Integer" resultMap="userlevel">
+        select a.id,a.name,b.level from t_user a,t_userlevel b where a.id=b.id and a.id=#{id}
+    </select>
+    <select id="getAllUser" resultMap="userlevel">
+        select a.id,a.name,b.level from t_user a,t_userlevel b where a.id=b.id
+    </select>
+</mapper>

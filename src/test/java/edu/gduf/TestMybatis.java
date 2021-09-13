@@ -2,6 +2,7 @@ package edu.gduf;
 
 
 import com.github.pagehelper.PageHelper;
+import edu.gduf.bean.UserLevel;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -12,6 +13,7 @@ import edu.gduf.bean.User;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -87,4 +89,36 @@ public class TestMybatis {
         }
         session.close();
     }
+
+    @Test
+    public void selectByids() {
+        SqlSession session=sessionFactory.openSession();
+        List<User> users = session.selectList("edu.gduf.mapper.UserMapper.selectByIds", new int[]{10001, 10003});
+        users.stream().forEach(System.out::println);
+    }
+
+    @Test
+    public void getUserById() {
+        SqlSession session=sessionFactory.openSession();
+        UserLevel userLevel = session.selectOne("edu.gduf.mapper.UserLevelMapper.getUserById", 10001);
+        System.out.println("id:"+userLevel.getUser().getId()+",name:"+userLevel.getUser().getName()+",level:"+userLevel.getLevel());
+        session.close();
+    }
+
+    @Test
+    public void getAllUser() {
+        SqlSession session=sessionFactory.openSession();
+        List<UserLevel> userLevels = session.selectList("edu.gduf.mapper.UserLevelMapper.getAllUser");
+        for (UserLevel userLevel :userLevels){
+            System.out.println("id:"+userLevel.getUser().getId()+",name:"+userLevel.getUser().getName()+",level:"+userLevel.getLevel());
+        }
+        session.close();
+
+    }
+/*    @Test
+    public void selectAllUser() {
+        SqlSession session=sessionFactory.openSession();
+        List<User> users = session.selectList("edu.gduf.mapper.UserMapper.selectAllUser");
+        users.stream().forEach(System.out::println);
+    }*/
 }

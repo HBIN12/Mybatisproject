@@ -18,4 +18,8 @@
     <select id="SelectAllUser" resultType="user">
         select id, name, CASE WHEN role="user"THEN "用户" else "管理员" end role from t_user where role="user"
     </select>
+    <select id="selectByIds" parameterType="Integer" resultType="user">
+        select * from t_user where id in 
+        <foreach collection="array" item="id" open="(" close=")" separator=",">#{id}</foreach>
+    </select>
 </mapper>
